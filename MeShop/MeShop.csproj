@@ -122,6 +122,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -134,6 +135,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\images\logo3_14_181731.png" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -167,6 +169,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Main\LogIn.cshtml" />
     <Content Include="Views\Main\Register.cshtml" />
+    <Content Include="Views\Shared\User_Master.cshtml" />
+    <Content Include="Views\User\Welcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
