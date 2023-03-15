@@ -9,9 +9,68 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Register</title>
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div> 
+    <!-- Main Content -->
+    <div class="container-fluid">
+        <div class="row main-content bg-success text-center" style="margin: auto; margin-top: 100px;">
+            <div class="col-md-4 text-center company__info">
+                <span class="company__logo"><h2><img src="~/Content/images/logo3_14_181731.png" style="width:100px;" /></h2></span>
+                @*<h4 class="company_title">MeShop</h4>*@
+            </div>
+            <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <h2>Register</h2>
+                    </div>
+                    <div class="row">
+                        <form control="" class="form-group">
+                            <div class="row">
+                                <input type="text" name="name" id="name" class="form__input" placeholder="Enter Name">
+                            </div>
+                            <div class="row">
+                                <input type="text" name="mobileno" id="mobileno" class="form__input" placeholder="Enter Mobile Number">
+                            </div>
+                            <div class="row">
+                                <input type="email" name="email" id="email" class="form__input" placeholder="Enter Email">
+                            </div>
+                            <div class="row">
+                                <input type="text" name="address1" id="address1" class="form__input" placeholder="Enter Address1">
+                            </div>
+                            <div class="row">
+                                <input type="text" name="address2" id="address2" class="form__input" placeholder="Enter Address2">
+                            </div>
+                            <div class="row">
+                                <input type="text" name="pincode" id="pincode" class="form__input" placeholder="Enter pincode">
+                            </div>
+                            <div class="row">
+                                <input type="text" name="username" id="username" class="form__input" placeholder="Enter Username">
+                            </div>
+                            <div class="row">
+                                <input type="password" name="password" id="password" class="form__input" placeholder="Enter Password">
+                            </div>
+                            @*<div class="row">
+            <input type="checkbox" name="remember_me" id="remember_me" class="">
+            <label for="remember_me">Remember Me!</label>
+        </div>*@
+                            <div class="row">
+                                <input type="submit" value="Submit" class="btn">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <p>Do you have an account? <a href="LogIn">LogIn Here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <div class="container-fluid text-center footer" style="margin-top: 10px;">
+        <p>Coded with &hearts; by <a href="#">MeShop.</a></p>
     </div>
 </body>
 </html>
