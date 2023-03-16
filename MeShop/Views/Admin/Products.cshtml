@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+<style>
+    h2 {
+        text-align: center;
+    }
+
+   .table2 {
+        text-align: center;
+        margin: auto;
+        width: 350px;
+    }
+</style>
+<h2>Add Products</h2>
+<div>
+    <table style="margin:auto;">
+        <tr>
+            <td><label>Product Name:</label></td>
+            <td><input id="txtname"/></td>
+        </tr>
+        <tr>
+            <td><label>Quantity:</label></td>
+            <td><input id="txtquantity"/></td>
+        </tr>
+        <tr>
+            <td><label>Price:</label></td>
+            <td><input id="txtprice"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            
+        </tr><tr>
+            <td></td>
+            <td id="btnsubmit"><button>Submit</button></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <table style="margin-top:40px;" class="table2">
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.Price</td>
+                <td><button>Edit</button></td>
+                <td><button>Delete</button></td>
+            </tr>
+        }
+    </table>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btnsubmit').click(function () {
+            let newdata = {
+                ProductName: $('#txtname').val(),
+                Quantity: $('#txtquantity').val(),
+                Price: $('#txtprice').val()
+            }
+            $.ajax({
+                type: 'Post',
+                url: '/Admin/InsertData',
+                data: newdata,
+                success: function (result) {
+                    if (result == 0) {
+                        alert("Product added successfully...");
+                        location.reload();
+                    }
+                    else {
+                        alert("Product already Exist...");
+                    }
+                },
+                error: function () {
+                    alert("Failed to add...");
+                }
+                })
+        })
+    })
+
+</script>
+

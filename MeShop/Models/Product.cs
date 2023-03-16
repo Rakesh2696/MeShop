@@ -14,24 +14,9 @@ namespace MeShop.Models
     
     public partial class Product
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
-        {
-            this.Booking_Bag = new HashSet<Booking_Bag>();
-        }
-    
-        public int ProductId { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public string Weight { get; set; }
-        public Nullable<decimal> Cost { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string Image { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Booking_Bag> Booking_Bag { get; set; }
+        public int Id { get; set; }
+        public string ProductName { get; set; }
+        public string Quantity { get; set; }
+        public Nullable<decimal> Price { get; set; }
     }
 }
