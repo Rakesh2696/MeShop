@@ -3,58 +3,79 @@
     ViewBag.Title = "Products";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
-<style>
-    h2 {
-        text-align: center;
-    }
 
-   .table2 {
-        text-align: center;
-        margin: auto;
-        width: 350px;
-    }
-</style>
 <h2>Add Products</h2>
-<div>
-    <table style="margin:auto;">
-        <tr>
-            <td><label>Product Name:</label></td>
-            <td><input id="txtname"/></td>
-        </tr>
-        <tr>
-            <td><label>Quantity:</label></td>
-            <td><input id="txtquantity"/></td>
-        </tr>
-        <tr>
-            <td><label>Price:</label></td>
-            <td><input id="txtprice"/></td>
-        </tr>
-        <tr>
-            <td></td>
-            
-        </tr><tr>
-            <td></td>
-            <td id="btnsubmit"><button>Submit</button></td>
-        </tr>
-    </table>
+
+<!-- Main Content -->
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center" style="margin: auto; margin-top:0px;width:600px;">
+        <div class="col-md-4 text-center company__info">
+            <span class="company__logo"><h2><img src="~/Content/images/logo3_14_181731.png" style="width:100px;" /></h2></span>
+            @*<h4 class="company_title">MeShop</h4>*@
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <form control="" class="form-group" >
+                        <div class="row">
+                            <input type="number" name="id" id="productid" class="form__input" placeholder="Product Id">
+                        </div>
+                        <div class="row">
+                            <input type="text" name="productname" id="name" class="form__input" placeholder="Product Name">
+                        </div>
+                        <div class="row">
+                            <input type="text" name="code" id="code" class="form__input" placeholder="Product code">
+                        </div>
+                        <div class="row">
+                            <!-- <span class="fa fa-lock"></span> -->
+                            <input type="text" name="weight" id="weight" class="form__input" placeholder="Weight">
+                        </div>
+
+                        <div class="row">
+                            <input type="text" name="cost" id="cost" class="form__input" placeholder="Cost">
+                        </div>
+                        <div class="row">
+                            <input type="datetime" hidden="hidden" name="date" id="createddate" value=@DateTime.Now class="form__input" placeholder="">
+                        </div>
+                        <div class="row">
+                            <input type="text" hidden="hidden" name="createdby" id="createdby" value="System" class="form__input" placeholder="">
+                        </div>
+                        <div class="row">
+                            <input type="file" name="image" id="image" class="form__input" accept="image/png,image/jpg,image/jpeg">
+                        </div>
+                        <div class="row">
+                            <input type="submit" value="Submit" class="btn">
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
 </div>
 <div>
-    <table style="margin-top:40px;" class="table2">
+    <br /><br />
+    <h2>Products List</h2>
+    <br />
+    <table width="500" style="margin:auto;">
         <tr>
             <th>Product Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Product Code</th>
+            <th>Weight</th>
+            <th>Cost</th>
+            <th>Image</th>
         </tr>
-        @foreach (var item in Model)
-        {
+        @foreach (var item in Model) { 
             <tr>
-                <td>@item.ProductName</td>
-                <td>@item.Quantity</td>
-                <td>@item.Price</td>
-                <td><button>Edit</button></td>
-                <td><button>Delete</button></td>
+                <td>@item.Name</td>
+                <td>@item.Code</td>
+                <td>@item.Weight</td>
+                <td>@item.Cost</td>
+                <td>@item.Image</td>
             </tr>
         }
     </table>
@@ -62,31 +83,34 @@
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 <script>
     $(document).ready(function () {
-        $('#btnsubmit').click(function () {
-            let newdata = {
-                ProductName: $('#txtname').val(),
-                Quantity: $('#txtquantity').val(),
-                Price: $('#txtprice').val()
+        $('.btn').on('click', function () {
+            let products = {
+                ProductId: $('#productid').val(),
+                Name: $('#name').val(),
+                Code: $('#code').val(),
+                Weight: $('#weight').val(),
+                Cost: $('#cost').val(),
+                Image: $('#image').val(),
+                CreatedDate:$('#createddate').val(),
+                CreatedBy:$('#createdby').val()
             }
             $.ajax({
                 type: 'Post',
                 url: '/Admin/InsertData',
-                data: newdata,
+                data: products,
                 success: function (result) {
-                    if (result == 0) {
-                        alert("Product added successfully...");
+                    if (result == 1) {
+                        alert("saved succesfully...");
                         location.reload();
                     }
                     else {
-                        alert("Product already Exist...");
+                        alert("This product already exist...");
                     }
                 },
                 error: function () {
-                    alert("Failed to add...");
+                    alert("failed...");
                 }
-                })
+            })
         })
     })
-
 </script>
-

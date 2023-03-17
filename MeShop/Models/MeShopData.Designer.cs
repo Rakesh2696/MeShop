@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Dotnet Practice\Asp.net\14-03-2023\MeShop\Models\MeShopData.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Dotnet Practice\Asp.net\14-03-2023_Meshop\MeShop\Models\MeShopData.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
