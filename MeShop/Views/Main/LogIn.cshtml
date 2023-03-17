@@ -1,6 +1,6 @@
 ﻿
 @{
-    Layout = null;
+//Layout = null;
 }
 
 <!DOCTYPE html>
@@ -42,7 +42,7 @@
                                 <label for="remember_me">Remember Me!</label>
                             </div>*@
                             <div class="row">
-                                <input type="submit" value="Submit"  class="btn">
+                                <input type="submit" value="Submit"  class="btn" id="btnsubmit">
                             </div>
                         </form>
                     </div>
@@ -57,5 +57,31 @@
     <div class="container-fluid text-center footer" style="margin-top: 10px;">
         <p>Coded with &hearts; by <a href="#">MeShop.</a></p>
     </div>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btnsubmit').click(function () {
+                let logindata = {
+                    UserName: $('#username').val(),
+                    Password:$('#password').val()
+                }
+                $.ajax({
+                    type:'post',
+                        url:'/Main/LogIn',
+                    data: logindata,
+                    success: function () {
+                        alert("login successfully");
+                    },
+                    error: function () { 
+                        alert("fail")
+                    }
+
+
+                })
+            })
+
+
+        })
+    </script>
 </body>
 </html>
