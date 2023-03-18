@@ -72,6 +72,7 @@
           <Property Name="Password" Type="varchar" MaxLength="200" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="Landmark" Type="varchar" MaxLength="200" />
         </EntityType>
         <Association Name="FK_Address_SigIn">
           <End Role="SigIn" Type="Self.SigIn" Multiplicity="0..1" />
@@ -195,6 +196,7 @@
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_SigIn" FromRole="SigIn" ToRole="Address" />
+          <Property Name="Landmark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Address_SigIn">
           <End Role="SigIn" Type="Self.SigIn" Multiplicity="0..1" />
@@ -316,6 +318,7 @@
           <EntitySetMapping Name="SigIns">
             <EntityTypeMapping TypeName="MeShopModel.SigIn">
               <MappingFragment StoreEntitySet="SigIn">
+                <ScalarProperty Name="Landmark" ColumnName="Landmark" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
