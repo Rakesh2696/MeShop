@@ -10,31 +10,34 @@ namespace MeShop.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        MeshopEntities4 entities = new MeshopEntities4();
+        MeShopEntities entities = new MeShopEntities();
+
         public ActionResult Welcome()
         {
+          //var list1=  entities.Products.Where(l => l.Image == "Image").ToList();
             return View();
         }
         public ActionResult Products()
         {
-            var data = entities.Products.ToList();
-            return View(data);
+            var list2 = entities.Products.ToList();
+            return View(list2);
         }
-        public JsonResult InsertData(Product newone)
+        [HttpPost]
+        public JsonResult InsertData(Product data)
         {
-            decimal result = 1;
+            decimal result = 0;
             try
             {
-                var list = entities.Products.Where(l => l.ProductName == newone.ProductName).SingleOrDefault();
-                if (list == null)
+                var list2 = entities.Products.Where(l => l.Name == data.Name).SingleOrDefault();
+                if (list2 == null)
                 {
-                    entities.Products.Add(newone);
+                    entities.Products.Add(data);
                     entities.SaveChanges();
-                    result = 0;
+                    result = 1;
                 }
                 else
                 {
-                    result = 1;
+                    result = 0;
                 }
             }
             catch (Exception ex)
@@ -43,6 +46,7 @@ namespace MeShop.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
 
     }
 }

@@ -159,23 +159,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MeShopData.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\Product.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>MeShopData.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SigIn.cs">
       <DependentUpon>MeShopData.tt</DependentUpon>
@@ -207,17 +192,6 @@
     <Content Include="Content\images\Green Tea.png" />
     <Content Include="Content\images\icecream.jpg" />
     <Content Include="Content\images\logo3_14_181731.png" />
-    <Content Include="Content\images\masala.png" />
-    <Content Include="Content\images\Oil.png" />
-    <Content Include="Content\images\pappu.png" />
-    <Content Include="Content\images\pickle.png" />
-    <Content Include="Content\images\Rice.png" />
-    <Content Include="Content\images\salt.png" />
-    <Content Include="Content\images\spicy.png" />
-    <Content Include="Content\images\tarmind.png" />
-    <Content Include="Content\images\turmeric.jpg" />
-    <Content Include="Content\JScript\carousal_script.js" />
-    <Content Include="Content\JScript\div_script.js" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -233,16 +207,6 @@
       <DependentUpon>MeShopData.edmx</DependentUpon>
       <LastGenOutput>MeShopData.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\MeShopData.edmx">
@@ -251,13 +215,6 @@
     </EntityDeploy>
     <Content Include="Models\MeShopData.edmx.diagram">
       <DependentUpon>MeShopData.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
