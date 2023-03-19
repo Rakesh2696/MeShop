@@ -28,7 +28,7 @@ namespace MeShop.Models
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<SigIn> SigIns { get; set; }
         public virtual DbSet<Booking_Bag> Booking_Bag { get; set; }
+        public virtual DbSet<SigIn> SigIns { get; set; }
     }
 }

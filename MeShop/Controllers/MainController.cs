@@ -29,15 +29,16 @@ namespace MeShop.Controllers
             bool result = false;
             try 
             {
+                registerdata.CreatedDate= DateTime.Now;
+                registerdata.CreatedBy = "SYSTEM";
                 meShop.SigIns.Add(registerdata);
                 meShop.SaveChanges();
                 result = true;
             }
             catch(Exception ex) 
             {
-            }
-            
 
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]

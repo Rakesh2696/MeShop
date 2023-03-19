@@ -145,8 +145,8 @@
           <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedDate" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="SigIn" Relationship="Self.FK_Address_SigIn" FromRole="Address" ToRole="SigIn" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Booking_Address" FromRole="Address" ToRole="Booking" />
+          <NavigationProperty Name="SigIn" Relationship="MeShopModel.FK_Address_SigIn" FromRole="Address" ToRole="SigIn" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -180,36 +180,6 @@
           <Property Name="Image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Booking_Bag" Relationship="MeShopModel.FK_Booking_Bag_Product" FromRole="Product" ToRole="Booking_Bag" />
         </EntityType>
-        <EntityType Name="SigIn">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="MobileNo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Address1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Address2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Pincode" Type="Int32" />
-          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Addresses" Relationship="Self.FK_Address_SigIn" FromRole="SigIn" ToRole="Address" />
-          <Property Name="Landmark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_Address_SigIn">
-          <End Role="SigIn" Type="Self.SigIn" Multiplicity="0..1" />
-          <End Role="Address" Type="Self.Address" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SigIn">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Address">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Booking_Address">
           <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
@@ -226,11 +196,6 @@
           <EntitySet Name="Addresses" EntityType="Self.Address" />
           <EntitySet Name="Bookings" EntityType="Self.Booking" />
           <EntitySet Name="Products" EntityType="Self.Product" />
-          <EntitySet Name="SigIns" EntityType="Self.SigIn" />
-          <AssociationSet Name="FK_Address_SigIn" Association="Self.FK_Address_SigIn">
-            <End Role="SigIn" EntitySet="SigIns" />
-            <End Role="Address" EntitySet="Addresses" />
-          </AssociationSet>
           <AssociationSet Name="FK_Booking_Address" Association="Self.FK_Booking_Address">
             <End Role="Address" EntitySet="Addresses" />
             <End Role="Booking" EntitySet="Bookings" />
@@ -239,6 +204,11 @@
           <AssociationSet Name="FK_Booking_Bag_Product" Association="MeShopModel.FK_Booking_Bag_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="Booking_Bag" EntitySet="Booking_Bag" />
+          </AssociationSet>
+          <EntitySet Name="SigIns" EntityType="MeShopModel.SigIn" />
+          <AssociationSet Name="FK_Address_SigIn" Association="MeShopModel.FK_Address_SigIn">
+            <End Role="SigIn" EntitySet="SigIns" />
+            <End Role="Address" EntitySet="Addresses" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Booking_Bag">
@@ -260,6 +230,36 @@
             </Principal>
             <Dependent Role="Booking_Bag">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SigIn">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Landmark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Addresses" Relationship="MeShopModel.FK_Address_SigIn" FromRole="SigIn" ToRole="Address" />
+        </EntityType>
+        <Association Name="FK_Address_SigIn">
+          <End Type="MeShopModel.SigIn" Role="SigIn" Multiplicity="0..1" />
+          <End Type="MeShopModel.Address" Role="Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SigIn">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -315,24 +315,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SigIns">
-            <EntityTypeMapping TypeName="MeShopModel.SigIn">
-              <MappingFragment StoreEntitySet="SigIn">
-                <ScalarProperty Name="Landmark" ColumnName="Landmark" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Booking_Bag">
             <EntityTypeMapping TypeName="MeShopModel.Booking_Bag">
               <MappingFragment StoreEntitySet="Booking_Bag">
@@ -340,6 +322,24 @@
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="BookingBagId" ColumnName="BookingBagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SigIns">
+            <EntityTypeMapping TypeName="MeShopModel.SigIn">
+              <MappingFragment StoreEntitySet="SigIn">
+                <ScalarProperty Name="Landmark" ColumnName="Landmark" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

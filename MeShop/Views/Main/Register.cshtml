@@ -27,7 +27,7 @@
                         <h2>Register</h2>
                     </div>
                     <div class="row">
-                        <form control="" class="form-group">
+                        <div  class="form-group">
                             <div class="row">
                                 <input type="text" name="name" id="name" class="form__input" placeholder="Enter Name">
                             </div>
@@ -55,14 +55,15 @@
                             <div class="row">
                                 <input type="password" name="password" id="password" class="form__input" placeholder="Enter Password">
                             </div>
+                            
                             @*<div class="row">
-                                    <input type="checkbox" name="remember_me" id="remember_me" class="">
-                                    <label for="remember_me">Remember Me!</label>
-                                </div>*@
+            <input type="checkbox" name="remember_me" id="remember_me" class="">
+            <label for="remember_me">Remember Me!</label>
+        </div>*@
                             <div class="row">
                                 <input type="submit" value="Submit" class="btn" id="btnsubmit">
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="row">
                         <p>Do you have an account? <a href="LogIn">LogIn Here</a></p>
@@ -85,11 +86,10 @@
                     Email: $('#email').val(),
                     Address1: $('#address1').val(),
                     Address2: $('#address2').val(),
+                    Landmark: $('#landmark').val(),
                     Pincode: $('#pincode').val(),
-                    UserName: $('#UserName').val(),
-                    Password: $('#Password').val(),
-                    CreatedDate: $('#CreatedDate').val(),
-                    CreatedBy: $('#CreatedBy').val()
+                    UserName: $('#username').val(),
+                    Password: $('#password').val()
 
                 }
                 $.ajax({
