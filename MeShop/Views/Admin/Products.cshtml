@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<h2>Add Products</h2>
+
+<!-- Main Content -->
+<div class="container-fluid">
+    <div class="row main-content bg-success text-center" style="margin: auto; margin-top:0px;width:600px;">
+        <div class="col-md-4 text-center company__info">
+            <span class="company__logo"><h2><img src="~/Content/images/logo3_14_181731.png" style="width:100px;" /></h2></span>
+            @*<h4 class="company_title">MeShop</h4>*@
+        </div>
+        <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+            <div class="container-fluid">
+                <div class="row">
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="row">
+                            <input type="text" name="productname" id="name" class="form__input" placeholder="Product Name">
+                        </div>
+                        <div class="row">
+                            <input type="text" name="code" id="code" class="form__input" placeholder="Product code">
+                        </div>
+                        <div class="row">
+                            <!-- <span class="fa fa-lock"></span> -->
+                            <input type="text" name="weight" id="weight" class="form__input" placeholder="Weight">
+                        </div>
+
+                        <div class="row">
+                            <input type="text" name="cost" id="cost" class="form__input" placeholder="Cost">
+                        </div>
+                        <div class="row">
+                            <input type="file" name="image" id="image" class="form__input" accept="image/*" />
+                        </div>
+                        <div class="row">
+                            <input type="submit" value="Submit" class="btn">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <br /><br />
+    <h2>Products List</h2>
+    <br />
+    <table width="500" style="margin:auto;">
+        <tr>
+            <th>Product Name</th>
+            <th>Product Code</th>
+            <th>Weight</th>
+            <th>Cost</th>
+            <th>Image</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Code</td>
+                <td>@item.Weight</td>
+                <td>@item.Cost</td>
+                @*<td><img width:20px;height:20px;src="@item.Image" /></td>*@
+            </tr>
+        }
+    </table>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.btn').on('click', function () {
+
+            if ($('#name').val() == "") {
+                alert("Please enter product name...")
+            }
+            else if ($('#code').val() == "") {
+                alert("Please enter product code...")
+            }
+            else if ($('#weight').val() == "") {
+                alert("Please enter product weight...")
+            }
+            else if ($('#cost').val() == "") {
+                alert("Please enter product cost...")
+            }
+            else if ($('#image').val() == "") {
+                alert("Please enter product image...")
+            }
+            else {
+                let file = $('#image').get(0).files;
+                let products = {
+                    Name: $('#name').val(),
+                    Code: $('#code').val(),
+                    Weight: $('#weight').val(),
+                    Cost: $('#cost').val(),
+                    Image: $('#image').get(0).files[0].name
+                }
+                //var products = new FormData();
+                //products.append("Image", file[0]);
+                $.ajax({
+                    type: 'Post',
+                    url: '/Admin/InsertData',
+                    data: products,
+                    success: function (result) {
+                        if (result == 1) {
+                            alert("saved succesfully...");
+                            location.reload();
+                        }
+                        if (result.responseJSON == 1) {
+                            var fileUpload = $("#image").get(0);
+                            var files = fileUpload.files;
+                            var fileData = new FormData();
+
+                            fileData.append(files[0].name, files[0]);
+                        $.ajax({
+                            type: 'Post',
+                            url: '/Admin/UploadImage',
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            data: fileData,
+                            success: function (result) {
+                            }
+                        });
+
+
+                            alert("saved succesfully...");
+                            location.reload();
+                        }
+                        else {
+                            alert("This product already exist...");
+                        }
+                    },
+                    error: function () {
+                        alert("failed...");
+                    }
+                })
+            }
+        })
+    })
+</script>

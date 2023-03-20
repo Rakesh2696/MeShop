@@ -192,17 +192,7 @@
     <Content Include="Content\images\Green Tea.png" />
     <Content Include="Content\images\icecream.jpg" />
     <Content Include="Content\images\logo3_14_181731.png" />
-    <Content Include="Content\images\masala.png" />
-    <Content Include="Content\images\Oil.png" />
-    <Content Include="Content\images\pappu.png" />
-    <Content Include="Content\images\pickle.png" />
-    <Content Include="Content\images\Rice.png" />
-    <Content Include="Content\images\salt.png" />
-    <Content Include="Content\images\spicy.png" />
-    <Content Include="Content\images\tarmind.png" />
-    <Content Include="Content\images\turmeric.jpg" />
-    <Content Include="Content\JScript\carousal_script.js" />
-    <Content Include="Content\JScript\div_script.js" />
+    <Content Include="Content\images\salt.jpg" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -258,9 +248,11 @@
     <Content Include="Views\User\Welcome.cshtml" />
     <Content Include="Views\Admin\Welcome.cshtml" />
     <Content Include="Views\Shared\Admin_Layout.cshtml" />
+    <Content Include="Views\Admin\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ProductImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
