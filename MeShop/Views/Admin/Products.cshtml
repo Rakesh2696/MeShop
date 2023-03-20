@@ -58,7 +58,6 @@
             <th>Product Code</th>
             <th>Weight</th>
             <th>Cost</th>
-            <th>Image</th>
         </tr>
         @foreach (var item in Model)
         {
@@ -67,7 +66,6 @@
                 <td>@item.Code</td>
                 <td>@item.Weight</td>
                 <td>@item.Cost</td>
-                @*<td><img width:20px;height:20px;src="@item.Image" /></td>*@
             </tr>
         }
     </table>
@@ -93,7 +91,6 @@
                 alert("Please enter product image...")
             }
             else {
-                let file = $('#image').get(0).files;
                 let products = {
                     Name: $('#name').val(),
                     Code: $('#code').val(),
@@ -101,22 +98,16 @@
                     Cost: $('#cost').val(),
                     Image: $('#image').get(0).files[0].name
                 }
-                //var products = new FormData();
-                //products.append("Image", file[0]);
+
                 $.ajax({
                     type: 'Post',
                     url: '/Admin/InsertData',
                     data: products,
                     success: function (result) {
                         if (result == 1) {
-                            alert("saved succesfully...");
-                            location.reload();
-                        }
-                        if (result.responseJSON == 1) {
                             var fileUpload = $("#image").get(0);
                             var files = fileUpload.files;
                             var fileData = new FormData();
-
                             fileData.append(files[0].name, files[0]);
                         $.ajax({
                             type: 'Post',
@@ -124,11 +115,12 @@
                             contentType: false, // Not to set any content header
                             processData: false, // Not to process data
                             data: fileData,
-                            success: function (result) {
+                            success: function () {
+                            },
+                            error: function () {
+
                             }
                         });
-
-
                             alert("saved succesfully...");
                             location.reload();
                         }
