@@ -1,8 +1,11 @@
 ﻿using MeShop.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace MeShop.Controllers
@@ -14,9 +17,32 @@ namespace MeShop.Controllers
 
         public ActionResult Welcome()
         {
-          //var list1=  entities.Products.Where(l => l.Image == "Image").ToList();
-            return View();
+            var list1 = entities.Products.ToList();
+            
+      
+            return View(list1);
         }
+        [HttpPost]
+        public ActionResult UploadImage()
+        {
+            try
+            {
+                HttpFileCollectionBase files = Request.Files;
+                for (int i = 0; i < files.Count; i++)
+                {
+                    HttpPostedFileBase file = files[i];
+                    string fname = file.FileName;
+                    fname = Path.Combine(Server.MapPath("~/Content/ProductImages/"), fname);
+                    file.SaveAs(fname);
+                }
+                return Json("File Uploaded Successfully!");
+            }
+            catch (Exception ex)
+            {
+                return Json("Error occurred. Error details: " + ex.Message);
+            }
+        }
+
         public ActionResult Products()
         {
             var list2 = entities.Products.ToList();
@@ -28,6 +54,8 @@ namespace MeShop.Controllers
             decimal result = 0;
             try
             {
+                data.CreatedDate = DateTime.Now;
+                data.CreatedBy = "System";
                 var list2 = entities.Products.Where(l => l.Name == data.Name).SingleOrDefault();
                 if (list2 == null)
                 {
