@@ -3,6 +3,7 @@
     ViewBag.Title = "Products";
     Layout = "~/Views/Shared/Admin_Layout.cshtml";
 }
+<link href="~/Content/jquery.growl.css" rel="stylesheet" />
 
 <h2>Add Products</h2>
 
@@ -76,19 +77,19 @@
         $('.btn').on('click', function () {
 
             if ($('#name').val() == "") {
-                alert("Please enter product name...")
+                $.growl.error({ message: "Please enter product name!" });
             }
             else if ($('#code').val() == "") {
-                alert("Please enter product code...")
+                $.growl.error({ message: "Please enter product code!" });
             }
             else if ($('#weight').val() == "") {
-                alert("Please enter product weight...")
+                $.growl.error({ message: "Please enter product weight!" });
             }
             else if ($('#cost').val() == "") {
-                alert("Please enter product cost...")
+                $.growl.error({ message: "Please enter product cost!" });
             }
             else if ($('#image').val() == "") {
-                alert("Please enter product image...")
+                $.growl.error({ message: "Please enter product image!" });
             }
             else {
                 let products = {
@@ -109,30 +110,32 @@
                             var files = fileUpload.files;
                             var fileData = new FormData();
                             fileData.append(files[0].name, files[0]);
-                        $.ajax({
-                            type: 'Post',
-                            url: '/Admin/UploadImage',
-                            contentType: false, // Not to set any content header
-                            processData: false, // Not to process data
-                            data: fileData,
-                            success: function () {
-                            },
-                            error: function () {
+                            $.ajax({
+                                type: 'Post',
+                                url: '/Admin/UploadImage',
+                                contentType: false, // Not to set any content header
+                                processData: false, // Not to process data
+                                data: fileData,
+                                success: function () {
+                                },
+                                error: function () {
 
-                            }
-                        });
-                            alert("saved succesfully...");
+                                }
+                            });
+                            $.growl.notice({ message: "Saved succesfully!" });
                             location.reload();
                         }
                         else {
-                            alert("This product already exist...");
+                            $.growl.warning({ message: "The Product already exist!" });
                         }
                     },
                     error: function () {
-                        alert("failed...");
+                        $.growl.error({ message: "fail" });
                     }
                 })
             }
         })
     })
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.growl.js"></script>
