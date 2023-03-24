@@ -7,143 +7,68 @@
 <head>
     <meta charset="UTF-8">
     <title>CodePen - Carousel</title>
-    @*<link rel="stylesheet" href="./style.css">*@
-    <link href="~/Content/css/carousal_style.css" rel="stylesheet" />
+    <style>
+        .cstm-height-card .card-img-top {
+            /*height: 100px;*/
+            object-fit: cover;
+        }
 
+        .card-img-top {
+            height: 200px;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- partial:index.partial.html -->
-    <div class="carousal">
-        <div class="images">
-
-            <img src="~/Content/images/15.jpg" />
-            <img src="~/Content/images/16.jpg" />
-            <img src="~/Content/images/12.jpg" />
-
-            <img src="~/Content/images/18.jpg" />
-
-            <img src="~/Content/images/17.jpg" />
-
-
+    <div class="container">
+        <div class="row mb-5" style="margin: 30px;">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="~/Content/ProductImages/@item.Image" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title">@item.Name</h4>
+                            <p class="card-title">@item.Weight</p>
+                            <h5 class="card-title">Rs.@item.Cost</h5>
+                            <input type="checkbox" id="txtCbox" name="interest" value="@item.ProductId" />
+                            <input type="hidden" id="hdntxtbox" />
+                        </div>
+                    </div>
+                </div>
+            }
 
         </div>
-        <div class="radio"></div>
-        <div class="prv"></div>
-        <div class="nxt"></div>
+
+    </div>
+  
+    <div style="text-align:center;"> 
+        <button id="refCart"> Go to Cart</button>
     </div>
 
-    <div style="margin-top: 100px;">
-    </div>
+    @*<script src="~/Scripts/jquery-3.4.1.js"></script>*@
 
+   
+    <script>
+        $(document).ready(function () {
+            $('#refCart').click(function () {
+                var vals = $(':checkbox:checked').map(function () {
+                    return $(this).val();
+                }).get().join(',');
+                $.ajax({
+                    type: 'POST',
+                    url: '/User/Cart',
+                    data: { 'productid': vals },
+                    success: function (data) {
+                        alert("success");
+                        location.reload();
+                    },
+                    error: function (error) {
+                        alert("fail");
+                    }
+                })
+            })
 
-
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-md-4">
-                <h4>Garlic</h4>
-                <img src="~/Content/images/garlic.jpg" class="img-thumbnail" alt="garlic">
-
-
-            </div>
-            <div class="col-md-4">
-                <h4>Pickle</h4>
-                <img src="~/Content/images/pickle.png" class="img-thumbnail" alt="garlic">
-
-                @*<img src="~/Content/images/pappu.png" />*@
-            </div>
-
-            <div class="col-md-4">
-                <h4>Grapes</h4>
-                @*<img src="~/Content/images/Oil.png" />*@
-                <img src="~/Content/images/grapes.jpg" class="img-thumbnail" alt="garlic">
-
-            </div>
-        </div>
-    </div>
-
-    <div style="margin-top: 100px;">
-    </div>
-
-
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-md-4">
-                <h4>Oil Packet</h4>
-                @*<img src="~/Content/images/grapes.jpg" />*@
-                <img src="~/Content/images/oil.png" class="img-thumbnail" alt="garlic">
-            </div>
-
-            <div class="col-md-4">
-                <h4>Turmeric Powder</h4>
-                <img src="~/Content/images/turmeric.jpg" class="img-thumbnail" alt="bird2">
-                @*<img src="~/Content/images/pappu.png" />*@
-            </div>
-
-            <div class="col-md-4">
-                <h4>Chilli Powder</h4>
-                @*<img src="~/Content/images/Oil.png" />*@
-                <img src="~/Content/images/spicy.png" class="img-thumbnail" alt="bird3">
-            </div>
-        </div>
-    </div>
-
-    <div style="margin-top: 100px;">
-    </div>
-
-
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-md-4">
-                <h4>Cherry</h4>
-                <img src="~/Content/images/cherry.jpg" class="img-thumbnail" alt="garlic">
-
-
-            </div>
-            <div class="col-md-4">
-                <h4>Salt</h4>
-                <img src="~/Content/images/salt.png" class="img-thumbnail" alt="garlic">
-
-                @*<img src="~/Content/images/pappu.png" />*@
-            </div>
-
-            <div class="col-md-4">
-                <h4>Masala Items</h4>
-                @*<img src="~/Content/images/Oil.png" />*@
-                <img src="~/Content/images/masala.png" class="img-thumbnail" alt="garlic">
-
-            </div>
-        </div>
-    </div>
-
-    <div style="margin-top: 100px;">
-    </div>
-
-
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-md-4">
-                <h4>Cumin</h4>
-                <img src="~/Content/images/cumin.png" class="img-thumbnail" alt="garlic">
-
-
-            </div>
-            <div class="col-md-4">
-                <h4>Rice</h4>
-                <img src="~/Content/images/Rice.png" class="img-thumbnail" alt="garlic">
-
-                @*<img src="~/Content/images/pappu.png" />*@
-            </div>
-
-            <div class="col-md-4">
-                <h4>Tarmind</h4>
-                @*<img src="~/Content/images/Oil.png" />*@
-                <img src="~/Content/images/tarmind.png" class="img-thumbnail" alt="garlic">
-
-            </div>
-        </div>
-    </div>
-    <script src="~/Content/JScript/carousal_script.js"></script>
+        })
+    </script>
 </body>
 
-s
