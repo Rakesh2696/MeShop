@@ -12,6 +12,8 @@
     <link href="~/Content/css/login.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery.growl.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 </head>
 <body>
     <!-- Main Content -->
@@ -27,7 +29,7 @@
                         <h2>Register</h2>
                     </div>
                     <div class="row">
-                        <div  class="form-group">
+                        <div class="form-group">
                             <div class="row">
                                 <input type="text" name="name" id="name" class="form__input" placeholder="Enter Name">
                             </div>
@@ -55,11 +57,11 @@
                             <div class="row">
                                 <input type="password" name="password" id="password" class="form__input" placeholder="Enter Password">
                             </div>
-                            
+
                             @*<div class="row">
-            <input type="checkbox" name="remember_me" id="remember_me" class="">
-            <label for="remember_me">Remember Me!</label>
-        </div>*@
+                                    <input type="checkbox" name="remember_me" id="remember_me" class="">
+                                    <label for="remember_me">Remember Me!</label>
+                                </div>*@
                             <div class="row">
                                 <input type="submit" value="Submit" class="btn" id="btnsubmit">
                             </div>
@@ -76,7 +78,6 @@
     <div class="container-fluid text-center footer" style="margin-top: 10px;">
         <p>Coded with &hearts; by <a href="#">MeShop.</a></p>
     </div>
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script>
         $(document).ready(function () {
             $('#btnsubmit').click(function () {
@@ -92,29 +93,75 @@
                     Password: $('#password').val()
 
                 }
-                $.ajax({
+                if ($('#name').val() == "") {
+        $.growl.error({ message: "Please Enter Name. "});
+
+                }
+                else if ($('#mobileno').val() == "") {
+        $.growl.error({ message: "Please Enter Mobile Number."});
+
+                }
+                else if ($('#email').val() == "") {
+        $.growl.error({ message: "Please Enter Email. "});
+
+                }
+                else if ($('#address1').val() == "") {
+        $.growl.error({ message: "Please Enter Adress1. "});
+
+                }
+                else if ($('#address2').val() == "") {
+        $.growl.error({ message: "Please Enter Address2. "});
+
+                }
+                else if($('#landmark').val()==""){
+        $.growl.error({ message: "Please Enter Landmark "});
+
+                }
+                else if ($('#pincode').val() == "") {
+        $.growl.error({ message: "Please Enter Pincode. "});
+
+                }
+                else if ($('#username').val() == "") {
+        $.growl.error({ message: "Please Enter Username. "});
+
+                }
+                else if ($('#password').val() == "") {
+        $.growl.error({ message: "Please Enter Password. "});
+
+                }
+                else if ($('#landmark').val() == "") {
+        $.growl.error({ message: "Please Enter Landmark. "});
+
+                }
+                else{
+                     $.ajax({
                     type: 'POST',
                     url: '/Main/Savedata',
                     data: registerdata,
                     success: function (result) {
                         if (result) {
-                            alert("register successfully");
-
+                            $.growl.warning({ message: "Saved Successfully.." });
+                            setTimeout(function () {
+                        location.reload();
+                        }, 2000);
                         }
                         else {
 
                         }
-                        
+
                     },
                     error: function () {
-                      alert("fail")
+                        $.growl.error({ message: "Fail "});
                     }
 
+
                 })
+                }
 
             })
 
         })
     </script>
+    <script src="~/Scripts/jquery.growl.js"></script>
 </body>
 </html>

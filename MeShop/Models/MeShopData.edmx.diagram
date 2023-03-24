@@ -13,9 +13,7 @@
         <AssociationConnector Association="MeShopModel.FK_Booking_Address" ManuallyRouted="false" />
         <EntityTypeShape EntityType="MeShopModel.Booking_Bag" Width="1.5" PointX="3" PointY="6.375" />
         <AssociationConnector Association="MeShopModel.FK_Booking_Bag_Product" />
-        <EntityTypeShape EntityType="MeShopModel.SigIn" Width="1.5" PointX="0.75" PointY="0.875" />
-        <AssociationConnector Association="MeShopModel.FK_Address_SigIn" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

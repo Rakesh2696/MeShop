@@ -1,4 +1,5 @@
 ﻿using MeShop.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ using System.Web.UI;
 
 namespace MeShop.Controllers
 {
-    
+
     public class MainController : Controller
     {
-        MeShopEntities meShop=new MeShopEntities();
+        MeShopEntities meShop = new MeShopEntities();
         // GET: Main
         public ActionResult LogIn()
         {
@@ -27,30 +28,47 @@ namespace MeShop.Controllers
         public JsonResult Savedata(SigIn registerdata)
         {
             bool result = false;
-            try 
+            try
             {
-                registerdata.CreatedDate= DateTime.Now;
+                registerdata.CreatedDate = DateTime.Now;
                 registerdata.CreatedBy = "SYSTEM";
                 meShop.SigIns.Add(registerdata);
                 meShop.SaveChanges();
                 result = true;
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
 
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public JsonResult LogIn(SigIn logindata) 
+        public JsonResult LogIn(SigIn logindata)
         {
-            bool result = false;
-            SigIn log = meShop.SigIns.Where(x=> x.UserName==logindata.UserName && x.Password==logindata.Password).FirstOrDefault();
-            if (log == null) 
+            string result = string.Empty;
+            try
             {
-                result= true;
+                var list = meShop.SigIns.Where(l => l.UserName == logindata.UserName && l.Password == logindata.Password).FirstOrDefault();
+                if (list != null)
+                {
+                    if (list.IsAdmin == false)
+                    {
+                        result = "User";
+                        //Response.Redirect("../User/Welcome");
+                    }
+                    else if (list.IsAdmin == true)
+                    {
+                        result = "Admin";
+                        //Response.Redirect("../Admin/Welcome");
+                    }
+                }
+                
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            catch (Exception ex)
+            {
+                result = "Error";
+            }
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
     }
 }

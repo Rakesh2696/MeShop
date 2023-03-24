@@ -1,6 +1,6 @@
 ﻿
 @{
-//Layout = null;
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -14,6 +14,8 @@
     <link href="~/Content/css/login.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/jquery.growl.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 </head>
 <body>
     <!-- Main Content -->
@@ -29,7 +31,7 @@
                         <h2>Log In</h2>
                     </div>
                     <div class="row">
-                        <form control="" class="form-group">
+                        <div class="form-group">
                             <div class="row">
                                 <input type="text" name="username" id="username" class="form__input" placeholder="Username">
                             </div>
@@ -38,13 +40,13 @@
                                 <input type="password" name="password" id="password" class="form__input" placeholder="Password">
                             </div>
                             @*<div class="row">
-                                <input type="checkbox" name="remember_me" id="remember_me" class="">
-                                <label for="remember_me">Remember Me!</label>
-                            </div>*@
+                                    <input type="checkbox" name="remember_me" id="remember_me" class="">
+                                    <label for="remember_me">Remember Me!</label>
+                                </div>*@
                             <div class="row">
-                                <input type="submit" value="Submit"  class="btn" id="btnsubmit">
+                                <input type="submit" value="Submit" class="btn" id="btnsubmit">
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="row">
                         <p>Don't have an account? <a href="Register">Register Here</a></p>
@@ -63,25 +65,38 @@
             $('#btnsubmit').click(function () {
                 let logindata = {
                     UserName: $('#username').val(),
-                    Password:$('#password').val()
+                    Password: $('#password').val()
                 }
-                $.ajax({
-                    type:'post',
-                        url:'/Main/LogIn',
-                    data: logindata,
-                    success: function () {
-                        alert("login successfully");
-                    },
-                    error: function () { 
-                        alert("fail")
-                    }
-
-
-                })
+                if ($('#username').val() == "") {
+                    $.growl.error({ message: "Please Enter Username. " });
+                }
+                else if ($('#password').val() == "") {
+                    $.growl.error({ message: "Please Enter Password. " });
+                }
+                else {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Main/LogIn',
+                        data: logindata,
+                        success: function (result) {
+                            if (result=="User") {
+                                location.replace("../User/Welcome");
+                            }
+                            else if (result == "Admin") {
+                                location.replace("../Admin/Welcome");
+                            }
+                            else {
+                                $.growl.error({ message: "Invalid Username or Password. " });
+                            }
+                        },
+                        error: function () {
+                            $.growl.error({ message: "Fail " });
+                        }
+                    })
+                }
             })
-
-
         })
     </script>
+    <script src="~/Scripts/jquery.growl.js"></script>
 </body>
 </html>

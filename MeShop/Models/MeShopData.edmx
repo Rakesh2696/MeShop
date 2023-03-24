@@ -46,7 +46,6 @@
           <Key>
             <PropertyRef Name="ProductId" />
           </Key>
-          <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
           <Property Name="Code" Type="varchar" MaxLength="100" />
           <Property Name="Weight" Type="varchar" MaxLength="50" />
@@ -56,6 +55,7 @@
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="Image" Type="varchar" MaxLength="500" />
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="SigIn">
           <Key>
@@ -73,6 +73,7 @@
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="Landmark" Type="varchar" MaxLength="200" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Address_SigIn">
           <End Role="SigIn" Type="Self.SigIn" Multiplicity="0..1" />
@@ -250,6 +251,7 @@
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Landmark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Addresses" Relationship="MeShopModel.FK_Address_SigIn" FromRole="SigIn" ToRole="Address" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Address_SigIn">
           <End Type="MeShopModel.SigIn" Role="SigIn" Multiplicity="0..1" />
@@ -328,6 +330,7 @@
           <EntitySetMapping Name="SigIns">
             <EntityTypeMapping TypeName="MeShopModel.SigIn">
               <MappingFragment StoreEntitySet="SigIn">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="Landmark" ColumnName="Landmark" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

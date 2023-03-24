@@ -129,7 +129,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -174,6 +173,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\carousal_style.css" />
     <Content Include="Content\css\div_style.css" />
+    <Content Include="Content\css\jquery.growl.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\adminstyle.css" />
     <Content Include="Content\images\11.jpg" />
@@ -223,6 +223,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.growl.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -239,9 +240,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Main\LogIn.cshtml" />
     <Content Include="Views\Main\Register.cshtml" />
     <Content Include="Views\Shared\User_Master.cshtml" />
